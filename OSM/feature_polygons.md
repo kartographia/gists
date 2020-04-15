@@ -18,4 +18,13 @@ where not (
 	 and landuse is null)
 	and (building is null or building = 'yes')
 	);
+	
+CREATE INDEX idx_osm_poly_way ON feature.osm_poly USING GIST(way) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_office ON feature.osm_poly(office) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_amenity ON feature.osm_poly(amenity) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_building ON feature.osm_poly(building) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_military ON feature.osm_poly(military) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_tourism ON feature.osm_poly(tourism) TABLESPACE device_location_index;
+CREATE INDEX idx_osm_poly_landuse ON feature.osm_poly(landuse) TABLESPACE device_location_index;
+	
 ```
