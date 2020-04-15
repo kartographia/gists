@@ -4,7 +4,7 @@ The feature.polygons table is a view created via a UNION ALL query using all the
 
 
 ### Filter polygons
-In our applications we filter the feature.polygons table
+In our applications we filter the feature.polygons table to just a handful of fields. Example:
 ```sql
 create table feature.osm_poly
 as 
