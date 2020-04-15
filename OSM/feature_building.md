@@ -3,7 +3,7 @@
 The building table contains polygons representing buildings. The table schema is below
 
 
-```
+```sql
 CREATE TABLE FEATURE.BUILDING (
     ID BIGSERIAL NOT NULL,
     NAME text,
@@ -23,7 +23,7 @@ ALTER TABLE FEATURE.BUILDING ADD UNIQUE (SOURCE_ID, SOURCE_KEY);
 
 The building table is populated using feature.polygons table
 
-```
+```sql
 
 insert into feature.building(name, local_name, source_id, source_key, geom, info)
 
