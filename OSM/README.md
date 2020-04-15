@@ -13,7 +13,7 @@ Basic process involves the following steps:
 
 
 
-### Break the planet up into chunks
+### Subsetting the Data
 We use osmium to subset osm into chunks prior to loading everything into PostgreSQL. We do this in order to help the loader insert data into PostgreSQL (e.g. avoid out of memory issues).
 
 We have a python script called `partition_planet` that automates the chunking process. The script is found in the scripts directory and is used as follows:
