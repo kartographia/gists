@@ -1,5 +1,28 @@
 # Building Table
 
+The building table contains polygons representing buildings. The table schema is below
+
+
+```
+CREATE TABLE FEATURE.BUILDING (
+    ID BIGSERIAL NOT NULL,
+    NAME text,
+    LOCAL_NAME text,
+    TYPE text,
+    SUBTYPE text,
+    SOURCE_ID bigint NOT NULL,
+    SOURCE_KEY bigint NOT NULL,
+    GEOM geometry(Geometry,4326) NOT NULL,
+    INFO jsonb,
+    CONSTRAINT PK_BUILDING PRIMARY KEY (ID)
+);
+
+ALTER TABLE FEATURE.BUILDING ADD UNIQUE (SOURCE_ID, SOURCE_KEY);
+```
+
+
+The building table is populated using feature.polygons table
+
 ```
 
 insert into feature.building(name, local_name, source_id, source_key, geom, info)
