@@ -12,12 +12,11 @@ Basic process involves the following steps:
  - Merge chunks into unified tables
 
 
+
 ### Break the planet up into chunks
-Create a directory to put your planet chunks:
-```
-mkdir /mnt/nvme1/chunks
-```
-Then run the python script that turns `planet-latest.osm.pbf` into the chunks:
+We use osmium to subset osm into chunks prior to loading everything into PostgreSQL. We do this in order to help the loader insert data into PostgreSQL (e.g. avoid out of memory issues).
+
+We have a python script called `partition_planet` that automates the chunking process. The script is found in the scripts directory and is used as follows:
 ```
 python3 py/partition_planet.py \
     -m 8e8 \
