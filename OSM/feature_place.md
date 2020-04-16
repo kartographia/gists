@@ -106,7 +106,7 @@ There are six joins total that correspond to the various feature classes in the 
 The actual `WHERE` clause is a little more complex than what was in the previous snippit. 
 In the sections below you will find the actual `WHERE` clause we use in the insert statements.
 
-## Service
+## Shop
 Here is the query used to find shops
 ```sql
 select distinct(
