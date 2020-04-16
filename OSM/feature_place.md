@@ -119,11 +119,7 @@ select distinct(
        END
 )
 
-from
---russia_all_point 
---beltway_point
-feature.points
-
+from feature.points
 
 where 
 
