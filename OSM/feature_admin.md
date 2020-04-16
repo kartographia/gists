@@ -30,7 +30,7 @@ insert into FEATURE.ADMIN(name, local_name, admin_level, region, country, source
 SELECT 
 tags -> 'name:en' as name, 
 name as local_name, 
-NULLIF(admin_level, '')::int, 
+CASE WHEN admin_level~E'^\\d+$' THEN CAST (admin_level AS INTEGER) ELSE NULL END as admin_level, 
 tags -> 'addr:region' as region, 
 tags -> 'addr:country' as country, 
 1 as source_id,
@@ -40,7 +40,7 @@ to_json(tags) as info
 
 FROM feature.polygons
 
-WHERE feature.polygons.admin_level IS NOT NULL
+WHERE admin_level IS NOT NULL
 
 on conflict do nothing;
 
@@ -48,15 +48,20 @@ on conflict do nothing;
 
 
 
-In addition to the official administrative boundaries, we also like to include neighbourhoods. For the areas in the US (e.g. Washington DC), we found the following to work quite well:
+In addition to the official administrative boundaries, we also like to include neighbourhoods. For areas in the US, we found the following to work quite well:
 
 ```sql
+
 insert into FEATURE.ADMIN(name, local_name, admin_level, region, country, source_id, source_key, geom, info) 
 
 SELECT 
 tags -> 'name:en' as name, 
 name as local_name, 
-NULLIF(admin_level, '')::int, 
+
+       CASE WHEN admin_level~E'^\\d+$' THEN CAST (admin_level AS INTEGER)
+            ELSE 10
+       END
+,
 tags -> 'addr:region' as region, 
 tags -> 'addr:country' as country, 
 1 as source_id,
@@ -66,9 +71,10 @@ to_json(tags) as info
 
 FROM feature.polygons
 
-WHERE feature.polygons.place = 'neighbourhood' and name is not null
+WHERE place = 'neighbourhood' and name is not null
 
 on conflict do nothing;
+
 ```
 
 
