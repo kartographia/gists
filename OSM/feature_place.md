@@ -107,6 +107,29 @@ The actual `WHERE` clause is a little more complex than what was in the previous
 In the sections below you will find the actual `WHERE` clause we use in the insert statements.
 
 ## Service
+Here is the query used to find shops
+```sql
+select distinct(
+
+       CASE WHEN shop='yes' THEN 'shop'
+            ELSE shop
+       END
+)
+
+from feature.points
+
+where 
+
+amenity is null and
+(shop is not null and shop not in (
+'parking',
+'parking_tickets'
+))
+
+order by shop;
+```
+
+## Service
 Here is the query used to find service-related businesses
 
 ```sql
