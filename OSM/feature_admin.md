@@ -27,6 +27,9 @@ The admin table is populated using the feature.polygons table like this:
 ```sql
 
 insert into FEATURE.ADMIN(name, local_name, admin_level, region, country, source_id, source_key, geom, info) 
+
+---
+
 SELECT 
 tags -> 'name:en' as name, 
 name as local_name, 
@@ -42,6 +45,8 @@ FROM feature.polygons
 
 WHERE admin_level IS NOT NULL
 
+---
+
 on conflict do nothing;
 
 ```
@@ -53,6 +58,8 @@ In addition to the official administrative boundaries, we also like to include n
 ```sql
 
 insert into FEATURE.ADMIN(name, local_name, admin_level, region, country, source_id, source_key, geom, info) 
+
+---
 
 SELECT 
 tags -> 'name:en' as name, 
@@ -72,6 +79,8 @@ to_json(tags) as info
 FROM feature.polygons
 
 WHERE place = 'neighbourhood' and name is not null
+
+---
 
 on conflict do nothing;
 
