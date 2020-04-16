@@ -106,6 +106,82 @@ There are six joins total that correspond to the various feature classes in the 
 The actual `WHERE` clause is a little more complex than what was in the previous snippit. 
 In the sections below you will find the actual `WHERE` clause we use in the insert statements.
 
+## Service
+Here is the query used to find service-related businesses
+
+```sql
+select distinct(
+
+       CASE WHEN service='yes' THEN 'service'
+            ELSE service
+       END
+)
+
+from feature.points
+
+where 
+
+amenity is null and
+(service is not null and service not in(
+'barn_ramp',
+'bicycle:pump',
+'ventilation',
+'driveway',
+'alley',
+'parking',
+'parking_aisle',
+'terminal',
+'crossing',
+'slipway',
+'tower',
+'base_tranceiver_station',
+'base_transceiver_station',
+'loading_dock',
+'bridge_control',
+'emergency_access',
+'emergency_exit',
+'event_venue',
+'fire exit',
+'public well',
+'public_well'
+))
+
+order by service;
+```
+
+## Office
+Here is the query used to find offices/businesses
+
+```sql
+select distinct(
+
+       CASE WHEN office='yes' THEN 'office'
+            ELSE office
+       END
+)
+
+from feature.points
+
+
+where 
+
+amenity is null and
+(office is not null and office not in (
+'camp_site',
+'fire_extinguisher',
+'festival_grounds',
+'farm',
+'habour',
+'harbour',
+'marina',
+'port',
+'parking',
+'parking_tickets'
+))
+
+order by office;
+```
+
 
 ## Leisure
 Here is the query used to find leisure related businesses
