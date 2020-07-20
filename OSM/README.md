@@ -1,6 +1,14 @@
 # OSM Data
 
-We leverage OSM to help identify dwell locations and to classify devices. OSM data is stored in a PostgreSQL/PostGIS database. 
+We leverage OSM to help identify dwell locations and to classify devices. OSM data is stored in a PostgreSQL/PostGIS database snd is organized into five tables:
+ - feature.points (imported from osm_point)
+ - [feature.polygons](feature_polygons.md) (imported from osm_polygon)
+ - [feature.admin](feature_admin.md)
+ - [feature.building](feature_building.md)
+ - [feature.place](feature_place.md)
+
+
+
 
 ## OSM Database
 Typically, we store OSM data in a dedicated database called `osm` in a database partition called `osm`. Example:
