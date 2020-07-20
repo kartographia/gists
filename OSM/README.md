@@ -26,9 +26,13 @@ Note that this will create an `osm` user in the database. The `osm` does not hav
 ```
 psql -h localhost -p 5432 -U osm osm
 ```
-If you encounter an `fe_sendauth: no password supplied` error or a password prompt, you will need to update the `pg_hba.conf` file and set the IPv4 and IPv6 config to `trust`. Example:
+If you encounter an `fe_sendauth: no password supplied` error or a password prompt, you will need to update the `pg_hba.conf` file and set the IPv4 and IPv6 config for the localhost to `trust`. Example:
 ```
 sudo vi /etc/postgresql/12/main/pg_hba.conf
+
+host    all             all             ::1/128                 trust
+host    all             all             127.0.0.1/32            trust
+
 sudo -i -u postgres psql -c "SELECT pg_reload_conf();"
 ```
 
