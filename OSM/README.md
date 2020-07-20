@@ -40,7 +40,7 @@ sudo -i -u postgres psql -c "SELECT pg_reload_conf();"
 ## Loading Data (Basic)
 Loading a small area of the earth is easy with `osm2pgsql`. Example:
 ```
-osm2pgsql -l -d osm -U osm -P 5432 -H localhost -S default.style -r pbf -p osm -v -C 30000 us-south-latest.osm.pbf
+osm2pgsql -l -d osm -U osm -P 5432 -H localhost -S default.style -r pbf -p osm -C 30000 -v --hstore us-south-latest.osm.pbf
 ```
 Note that the command required a `default.style` which you can download here:
 ```
