@@ -44,15 +44,13 @@ curl -O https://raw.githubusercontent.com/openstreetmap/osm2pgsql/master/default
 ```
 
 ## Loading Data (Advanced)
-Loading large areas or the entire planet may be impossible to do with `osm2pgsql` depending on your hardware configuration. To circumvent these isses, we break the osm data up into chunks and then load the chunks into PostgreSQL.
+Loading large areas or the entire planet may be impossible to do with `osm2pgsql` depending on your hardware configuration. To circumvent these issues, we break the osm data up into chunks and then load the chunks into PostgreSQL.
 
 
 ### Creating Chunks
-We use osmium to subset osm into chunks prior to loading everything into PostgreSQL. We do this in order to help the loader insert data into PostgreSQL (e.g. avoid out of memory issues).
-
 We have a python script called `partition_planet` that automates the chunking process. The script is found in the scripts directory and is used as follows:
 ```
-python3 py/partition_planet.py \
+python3 partition_planet.py \
     -m 8e8 \
     -i planet-latest.osm.pbf \
     -o /mnt/nvme1/chunks/
@@ -64,13 +62,16 @@ The `-i` option specifies the location of the planet file.
 The `-o` option specifies the output directory into which the chunks will be put.
 
 Note that the `partition_planet.py` script requires the `pexpect` python module and is installed by running 
-```pip3 install pexpect```
+```
+pip3 install pexpect
+```
+Under the hood, the `partition_planets.py` script calls `osmium` to subset osm.
 
 ### Loading Chunks
 We have a python script called `upload_chunks` that automates the loading process. The script is found in the scripts directory and is used as follows:
 
 ```
-python3 py/upload_chunks.py -d /mnt/nvme1/chunks
+python3 upload_chunks.py -d /mnt/nvme1/chunks
 ```
 This script takes 5-6 hours to run for the whole planet. 
 The result is 4 tables per chunk: one each for points, lines, polygons and roads. Thus with 135 chunks you will get 540 tables.
