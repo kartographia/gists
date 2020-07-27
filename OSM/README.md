@@ -27,8 +27,8 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS hstore;
 CREATE USER osm WITH PASSWORD null;
 GRANT CONNECT ON DATABASE osm TO osm;
-grant all privileges on database osm to osm;
 GRANT ALL PRIVILEGES ON DATABASE osm to osm;
+SELECT pg_reload_conf();
 ```
 Note that this will create an `osm` user in the database. The `osm` does not have a password. This makes it a little easier to load data using `osm2pgsql` (see below). You can verify that the `osm` user has access to the `osm` database using psql. Example:
 ```
