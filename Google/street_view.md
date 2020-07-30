@@ -26,6 +26,6 @@ If you want to use the url in an iframe, you will need to append a `&output=svem
 ```
 
 ### References
-http://asnsblues.blogspot.com/2011/11/google-maps-query-string-parameters.html
-https://stackoverflow.com/questions/2759639/link-to-google-streetview-using-lat-long
-https://www.thedataschool.com.au/ivy-yin/how-to-embed-google-street-view-in-tableau/
+ - http://asnsblues.blogspot.com/2011/11/google-maps-query-string-parameters.html
+ - https://stackoverflow.com/questions/2759639/link-to-google-streetview-using-lat-long
+ - https://www.thedataschool.com.au/ivy-yin/how-to-embed-google-street-view-in-tableau/
