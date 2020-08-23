@@ -54,6 +54,10 @@ Note that the command required a `default.style` which you can download here:
 ```
 curl -O https://raw.githubusercontent.com/openstreetmap/osm2pgsql/master/default.style
 ```
+Loading large areas or the entire planet may require additional command line arguments used to create temporary tables and files:
+```
+osm2pgsql -l -d osm -U osm -P 5432 -H localhost -S default.style -r pbf -p osm -C 30000 -v --hstore --slim --drop --flat-nodes /share/osm/nodes.cache planet-latest.osm.pbf
+```
 
 ## Loading Data (Advanced)
 Loading large areas or the entire planet may be impossible to do with `osm2pgsql` depending on your hardware configuration. To circumvent these issues, we break the osm data up into chunks and then load the chunks into PostgreSQL.
